@@ -3,6 +3,8 @@ use crossterm::{event, Result, terminal};
 mod editor;
 mod reader;
 mod output;
+mod editor_contents;
+mod cursor_controller;
 
 struct CleanUp;
 
@@ -14,7 +16,8 @@ impl Drop for CleanUp {
 
 fn main() -> crate::Result<()> {
     let _clean_up = CleanUp;
-    let editor = Editor::new();
+    terminal::enable_raw_mode()?;
+    let mut editor = Editor::new();
     while editor.run()? {}
     Ok(())
 }
