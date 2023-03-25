@@ -5,7 +5,7 @@ mod reader;
 mod output;
 mod editor_contents;
 mod cursor_controller;
-
+mod editor_rows;
 struct CleanUp;
 
 impl Drop for CleanUp {
