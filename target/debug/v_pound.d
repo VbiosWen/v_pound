@@ -1,1 +1,1 @@
-C:\project\v_pound\target\debug\v_pound.exe: C:\project\v_pound\src\editor.rs C:\project\v_pound\src\main.rs C:\project\v_pound\src\reader.rs
+/Users/tengmu/os/v_pound/target/debug/v_pound: /Users/tengmu/os/v_pound/src/cursor_controller.rs /Users/tengmu/os/v_pound/src/editor.rs /Users/tengmu/os/v_pound/src/editor_contents.rs /Users/tengmu/os/v_pound/src/editor_rows.rs /Users/tengmu/os/v_pound/src/main.rs /Users/tengmu/os/v_pound/src/output.rs /Users/tengmu/os/v_pound/src/reader.rs

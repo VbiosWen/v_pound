@@ -16,9 +16,9 @@ const VERSION: &'static str = "1.0.0";
 
 pub struct Output {
     pub win_size: (usize, usize),
-    editor_contents: EditorContents,
-    cursor_controller: CursorController,
-    editor_row: EditorRows,
+    pub editor_contents: EditorContents,
+    pub cursor_controller: CursorController,
+    pub editor_row: EditorRows,
 }
 
 impl Output {
@@ -61,7 +61,7 @@ impl Output {
                     self.editor_contents.push('~');
                 }
             } else {
-                let row = self.editor_row.get_row(file_row);
+                let row = self.editor_row.get_render(file_row);
                 let column_offset = self.cursor_controller.column_offset;
                 let len = cmp::min(row.len().saturating_sub(column_offset), screen_columns);
                 let start = if len == 0 { 0 } else { column_offset };

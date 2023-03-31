@@ -1,3 +1,4 @@
+use std::cmp;
 use std::io::{self, stdout};
 
 use crate::output::Output;
@@ -36,15 +37,26 @@ impl Editor {
             } => self.output.move_cursor(direction),
             KeyEvent {
                 code: val @ (KeyCode::PageUp | KeyCode::PageDown),
-                modifiers : event::KeyModifiers::NONE
-            } => (0..self.output.win_size.1).for_each(|_| {
-                self.output.move_cursor(if matches!(val,KeyCode::PageUp){
-                    KeyCode::Up
-                }else {
-                    KeyCode::Down
-                });
-            }),
-            _ => {},
+                modifiers: event::KeyModifiers::NONE,
+            } => {
+                if matches!(val, KeyCode::PageUp) {
+                    self.output.cursor_controller.cursor_y =
+                        self.output.cursor_controller.row_offset
+                } else {
+                    self.output.cursor_controller.cursor_y = cmp::min(
+                        self.output.win_size.1 + self.output.cursor_controller.row_offset - 1,
+                        self.output.editor_row.number_of_rows(),
+                    )
+                }
+                (0..self.output.win_size.1).for_each(|_| {
+                    self.output.move_cursor(if matches!(val, KeyCode::PageUp) {
+                        KeyCode::Up
+                    } else {
+                        KeyCode::Down
+                    })
+                })
+            }
+            _ => {}
         }
         Ok(true)
     }
